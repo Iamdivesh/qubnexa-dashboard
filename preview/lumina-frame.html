@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LUMINA — Footer Frame (Light / The Thread Resolved)</title>
+<style>
+:root{--bg:#F7F9FC;--ink:#0B1E3D;--accent:#2F6FED;--sand:#E4DAC6;--sand-deep:#8A6D3B;
+  --ease:cubic-bezier(0.16,1,0.3,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,"Segoe UI",system-ui,sans-serif;color:var(--ink);min-height:100vh;
+  background:linear-gradient(180deg,var(--bg) 0%,rgba(228,218,198,.35) 100%)}
+.page{padding:60px 6vw 0}
+.ghost{height:26vh;display:flex;align-items:center;color:rgba(11,30,61,.35);font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.15em}
+
+footer{position:relative;padding-top:56px}
+/* resolved thread along the panel's top edge */
+.edge{position:absolute;top:-2px;left:24px;right:24px;height:120px}
+.edge path.line{fill:none;stroke:#0B1E3D;stroke-width:3;stroke-linecap:round;
+  stroke-dasharray:1600;stroke-dashoffset:1600;animation:draw 1.4s var(--ease) .2s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.loop-dot{animation:pop .5s var(--ease) 1.5s both}
+@keyframes pop{from{opacity:0}to{opacity:1}}
+
+.panel{position:relative;border-radius:28px;background:rgba(255,255,255,.72);backdrop-filter:blur(24px);
+  border:1px solid rgba(11,30,61,.12);box-shadow:0 16px 48px rgba(11,30,61,.12);
+  padding:64px 56px 40px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;animation:fadeUp 1s var(--ease) .1s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+h2{font-size:clamp(28px,3.4vw,44px);letter-spacing:-.02em;line-height:1.12;font-weight:700}
+h2 em{font-style:normal;color:var(--accent)}
+.brandline{margin-top:18px;font-size:14.5px;line-height:1.6;color:rgba(11,30,61,.7);max-width:420px}
+.col h3{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;color:var(--sand-deep);margin-bottom:16px;font-weight:600}
+.col a{display:block;text-decoration:none;color:var(--ink);font-size:14.5px;padding:7px 0;transition:color .2s var(--ease)}
+.col a:hover{color:var(--accent)}
+.cta-card{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  margin-top:8px;padding:22px 28px;border-radius:18px;background:rgba(47,111,237,.08);border:1px solid rgba(47,111,237,.2)}
+.cta-card p{font-size:15.5px;font-weight:600}
+.btn{background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:14px;
+  padding:12px 24px;border-radius:999px;white-space:nowrap;transition:background .2s var(--ease)}
+.btn:hover{background:#1E54C7}
+.legal{display:flex;justify-content:space-between;margin-top:28px;padding-top:20px;
+  border-top:1px solid rgba(11,30,61,.12);font-family:"JetBrains Mono",monospace;font-size:11.5px;color:rgba(11,30,61,.45)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.edge path.line{stroke-dashoffset:0}.loop-dot{opacity:1}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="ghost">… 08 PROCESS — end of narrative ↓</div>
+
+  <footer aria-label="LUMINA footer">
+    <!-- THE THREAD · resolution: the line rises from the edge, closes through a ring, and ends in the dot that opened VEX -->
+    <svg class="edge" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+      <path class="line" d="M 0 118 H 380 C 470 118 500 20 600 20 C 700 20 730 118 820 118 H 1200"/>
+      <circle class="loop-dot" cx="600" cy="20" r="9" fill="#2F6FED"/>
+    </svg>
+
+    <div class="panel">
+      <div class="col">
+        <h2>Build Better.<br>Automate Smarter.<br><em>Grow Faster.</em></h2>
+        <p class="brandline">QubNexa connects digital systems, automation and AI to help businesses operate better and grow faster.</p>
+      </div>
+      <nav class="col" aria-label="Footer links">
+        <h3>EXPLORE</h3>
+        <a href="#">Build</a><a href="#">Automate</a><a href="#">Intelligence</a><a href="#">Services</a><a href="#">Process</a>
+      </nav>
+      <div class="col">
+        <h3>CONTACT</h3>
+        <a href="#">hello@qubnexa.com</a>
+        <a href="#">Book an intro call →</a>
+        <h3 style="margin-top:28px">STATUS</h3>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:rgba(11,30,61,.5)">LOOP CLOSED · THREAD COMPLETE</p>
+      </div>
+
+      <div class="cta-card">
+        <p>Have a system to build or a workflow to automate?</p>
+        <a class="btn" href="#">Book an intro call</a>
+      </div>
+
+      <div class="legal"><span>© QubNexa. All rights reserved.</span><span>01 → 09 · THE THREAD, CLOSED</span></div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

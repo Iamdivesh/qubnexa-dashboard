@@ -36,8 +36,10 @@ function YoutubeIcon() {
 }
 
 /**
- * LUMINA liquid-glass footer: a rounded-3xl glass panel floating over the
- * persistent video stage, with a 12-col link grid and a hairline bottom bar.
+ * LUMINA footer (docs/vex-lumina-rebuild.md §2): floating raised-glass panel
+ * on a sand wash; the panel's top edge carries The Thread resolved into a
+ * closed ring with the azure dot from VEX chapter 01 sitting inside the loop.
+ * Link architecture (Services / Company / Legal & Contact) unchanged.
  */
 
 const columns = [
@@ -77,76 +79,147 @@ const socials = [
   { label: "YouTube", href: "https://www.youtube.com/", Icon: YoutubeIcon },
 ];
 
+/**
+ * THE THREAD · resolution beat — the line rises from the panel's top edge,
+ * loops once through a closed ring, and returns; the azure dot that opened
+ * VEX sits inside the loop. Story complete.
+ */
+function ThreadEdge() {
+  return (
+    <svg
+      className="pointer-events-none absolute -top-[2px] left-6 right-6 h-[120px] w-auto"
+      style={{ left: "1.5rem", right: "1.5rem", height: 120, width: "calc(100% - 3rem)" }}
+      viewBox="0 0 1200 120"
+      preserveAspectRatio="none"
+      aria-hidden
+    >
+      <path
+        className="thread-edge"
+        d="M 0 118 H 380 C 470 118 500 20 600 20 C 700 20 730 118 820 118 H 1200"
+        fill="none"
+        stroke="#0B1E3D"
+        strokeWidth="3"
+        strokeLinecap="round"
+        vectorEffect="non-scaling-stroke"
+      />
+      <circle className="thread-loop-dot" cx="600" cy="20" r="9" fill="#2F6FED" />
+      <circle className="thread-edge-pulse" r="6" fill="#2F6FED" />
+    </svg>
+  );
+}
+
 export function Footer() {
   return (
-    <motion.footer
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-      className="container-x mt-32 md:mt-64"
+    <div
+      aria-hidden={false}
+      style={{
+        background:
+          "linear-gradient(180deg, var(--bg) 0%, rgba(228,218,198,0.35) 100%)",
+      }}
     >
-      <div className="liquid-glass rounded-3xl px-6 py-10 md:px-12 md:py-14">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
-          {/* Brand column — col-span-5 */}
-          <div className="md:col-span-5">
-            <a
-              href="#hero"
-              className="text-xl font-semibold tracking-tight text-white"
-            >
-              QubNexa
-            </a>
-            <p className="mt-4 max-w-[38ch] text-sm leading-relaxed text-white/70">
-              QubNexa connects digital systems, automation and AI to help
-              businesses operate better and grow faster.
-            </p>
-          </div>
+      <motion.footer
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="container-x pt-24 md:pt-32"
+        aria-label="LUMINA footer"
+      >
+        <div className="relative">
+          {/* THE THREAD resolved along the top edge */}
+          <ThreadEdge />
 
-          {/* Link columns — col-span-7 */}
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-7">
-            {columns.map((column) => (
-              <div key={column.heading}>
-                <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-white">
-                  {column.heading}
-                </h3>
-                <ul className="list-none space-y-2 p-0">
-                  {column.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-xs text-white/60 transition-colors duration-200 hover:text-white"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+          <div className="liquid-glass liquid-glass-raised relative rounded-[28px] px-6 pb-10 pt-16 md:px-12 md:pb-12 md:pl-14 md:pr-14 md:pt-16">
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
+              {/* Brand column */}
+              <div className="md:col-span-5">
+                <a
+                  href="#hero"
+                  className="text-xl font-semibold tracking-tight text-text-hi"
+                >
+                  QubNexa
+                </a>
+                <h2 className="text-heading mt-6 font-bold text-text-hi">
+                  Build Better.
+                  <br />
+                  Automate Smarter.
+                  <br />
+                  <em className="font-bold not-italic text-accent">Grow Faster.</em>
+                </h2>
+                <p className="mt-4 max-w-[38ch] text-sm leading-relaxed text-text-mid">
+                  QubNexa connects digital systems, automation and AI to help
+                  businesses operate better and grow faster.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-start justify-between gap-6 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
-          <p className="text-[0.625rem] uppercase tracking-widest text-white opacity-50">
-            © QUBNEXA. ALL RIGHTS RESERVED.
-          </p>
-          <div className="flex items-center gap-4">
-            {socials.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                className="text-white/50 transition-colors duration-200 hover:text-white"
+              {/* Link columns */}
+              <nav
+                aria-label="Footer links"
+                className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-7"
               >
-                <Icon />
-              </a>
-            ))}
+                {columns.map((column) => (
+                  <div key={column.heading}>
+                    <h3 className="metadata-mono mb-4 font-semibold text-sand-deep">
+                      {column.heading}
+                    </h3>
+                    <ul className="list-none space-y-2 p-0">
+                      {column.links.map((link) => (
+                        <li key={link.label}>
+                          <a
+                            href={link.href}
+                            className="text-sm text-text-hi transition-colors duration-200 hover:text-accent"
+                          >
+                            {link.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </nav>
+
+              {/* CTA card */}
+              <div className="flex flex-col items-start justify-between gap-5 rounded-[18px] border border-[rgba(47,111,237,0.2)] bg-accent-tint px-6 py-5 sm:flex-row sm:items-center md:col-span-12 md:mt-2">
+                <p className="text-[0.95rem] font-semibold text-text-hi">
+                  Have a system to build or a workflow to automate?
+                </p>
+                <a
+                  href="mailto:hello@qubnexa.com?subject=Intro%20call%20%E2%80%94%20QubNexa"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="whitespace-nowrap rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-strong"
+                >
+                  Book an intro call
+                </a>
+              </div>
+            </div>
+
+            {/* Legal row */}
+            <div className="mt-10 flex flex-col items-start justify-between gap-6 border-t border-[rgba(11,30,61,0.12)] pt-6 sm:flex-row sm:items-center">
+              <p className="metadata-mono text-text-low">
+                © QUBNEXA. ALL RIGHTS RESERVED.
+              </p>
+              <span className="metadata-mono hidden text-text-low md:inline">
+                01 → 09 · THE THREAD, CLOSED
+              </span>
+              <div className="flex items-center gap-4">
+                {socials.map(({ label, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={label}
+                    className="text-text-low transition-colors duration-200 hover:text-accent"
+                  >
+                    <Icon />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </motion.footer>
+      </motion.footer>
+    </div>
   );
 }

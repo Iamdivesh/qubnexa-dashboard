@@ -1,44 +1,63 @@
 @import "tailwindcss";
 
+/*
+ * QubNexa Light Theme — approved token system (docs/theme-light.md).
+ * Legacy variable names (--background, --text-hi, ...) are kept but now map
+ * to light values so existing token-driven sections stay readable.
+ */
 :root {
-  --background: #0a0f1e;
-  --surface: #101731;
-  --surface-strong: #16203f;
-  --border: rgba(148, 178, 255, 0.1);
-  --border-strong: rgba(148, 178, 255, 0.24);
-  --text-hi: #edf2fc;
-  --text-mid: #9fb0d6;
-  --text-low: #5e6f9b;
-  --navy: #1b2a6b;
-  --azure: #1e8ff2;
-  --azure-hover: #47acf7;
-  --azure-deep: #0b63c4;
-  --sky: #5fb8f8;
-  --cta: var(--azure);
-  --cta-hover: var(--azure-hover);
-  --cta-contrast: #0a0f1e;
-}
+  /* Core palette */
+  --bg: #f7f9fc;
+  --bg-raised: #ffffff;
+  --ink: #0b1e3d;
+  --ink-70: rgba(11, 30, 61, 0.7);
+  --ink-50: rgba(11, 30, 61, 0.5);
+  --ink-30: rgba(11, 30, 61, 0.3);
+  --ink-12: rgba(11, 30, 61, 0.12);
+  --ink-10: rgba(11, 30, 61, 0.1);
+  --accent: #2f6fed;
+  --accent-strong: #1e54c7;
+  --accent-tint: rgba(47, 111, 237, 0.1);
+  --sand: #e4dac6;
+  --sand-deep: #8a6d3b;
+  --sand-tint: rgba(228, 218, 198, 0.35);
+  --grid-line: rgba(11, 30, 61, 0.06);
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #f5f7fc;
-    --surface: #fbfcfe;
-    --surface-strong: #ffffff;
-    --border: rgba(16, 32, 79, 0.1);
-    --border-strong: rgba(16, 32, 79, 0.22);
-    --text-hi: #101731;
-    --text-mid: #3d4c77;
-    --text-low: #7c89ad;
-    --azure-hover: #0e71d6;
-    --sky: #0e71d6;
-    --cta: var(--azure-deep);
-    --cta-hover: #0a57af;
-    --cta-contrast: #ffffff;
-  }
+  /* Legacy aliases → light values (blast-radius control) */
+  --background: var(--bg);
+  --surface: var(--bg-raised);
+  --surface-strong: var(--bg-raised);
+  --border: var(--ink-10);
+  --border-strong: var(--ink-30);
+  --text-hi: var(--ink);
+  --text-mid: var(--ink-70);
+  --text-low: var(--ink-50);
+  --navy: var(--ink);
+  --azure: var(--accent);
+  --azure-hover: var(--accent-strong);
+  --azure-deep: var(--accent-strong);
+  --sky: var(--accent);
+  --cta: var(--accent);
+  --cta-hover: var(--accent-strong);
+  --cta-contrast: #ffffff;
+
+  /* Motion tokens */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-fast: 200ms;
+  --dur-med: 500ms;
+  --dur-reveal: 800ms;
+  --dur-motif-pulse: 2400ms;
 }
 
 @theme inline {
-  --color-bg: var(--background);
+  --color-bg: var(--bg);
+  --color-bg-raised: var(--bg-raised);
+  --color-ink: var(--ink);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-sand: var(--sand);
+  --color-sand-deep: var(--sand-deep);
   --color-surface: var(--surface);
   --color-surface-strong: var(--surface-strong);
   --color-border: var(--border);
@@ -65,12 +84,12 @@ body {
 }
 
 ::selection {
-  background: var(--azure);
-  color: var(--background);
+  background: var(--accent);
+  color: #ffffff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--azure);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -155,12 +174,12 @@ body {
 
   .rail-active .rail-tick {
     width: 2.5rem;
-    background: var(--azure);
+    background: var(--accent);
   }
 
   .rail-active .metadata-mono {
     opacity: 1;
-    color: var(--text-mid);
+    color: var(--ink-70);
   }
 }
 
@@ -198,51 +217,27 @@ body {
   opacity: 0;
 }
 
-/* No-WebGL ambient fallback blobs — extremely slow drift only. */
-@keyframes ambient-drift {
-  from {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(4%, -3%, 0) scale(1.06);
-  }
-}
-
-.ambient-blob {
-  animation: ambient-drift 26s ease-in-out infinite alternate;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ambient-blob {
-    animation: none;
-  }
-}
-
-/* LUMINA liquid-glass (exact spec) — masked gradient border via ::before,
-   luminosity-blended translucent fill, inset top highlight. */
+/* Light liquid-glass formulation (docs/theme-light.md §3): ink-on-paper. */
 .liquid-glass {
-  background: rgba(255, 255, 255, 0.01);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px) saturate(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(1.1);
   border: none;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 8px 32px rgba(11, 30, 61, 0.08);
   position: relative;
-  overflow: hidden;
 }
 .liquid-glass::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  padding: 1.4px;
+  padding: 1px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0.1) 20%,
-    rgba(255, 255, 255, 0) 40%,
-    rgba(255, 255, 255, 0) 60%,
-    rgba(255, 255, 255, 0.1) 80%,
-    rgba(255, 255, 255, 0.3) 100%
+    rgba(11, 30, 61, 0.14),
+    rgba(11, 30, 61, 0.08)
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -250,6 +245,17 @@ body {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+}
+.liquid-glass-raised {
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 16px 48px rgba(11, 30, 61, 0.12);
+}
+.liquid-glass-raised::before {
+  background: linear-gradient(
+    180deg,
+    rgba(11, 30, 61, 0.16),
+    rgba(11, 30, 61, 0.1)
+  );
 }
 
 .glass-pill {
@@ -260,18 +266,22 @@ body {
   border-radius: 999px;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-mid);
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.07), rgba(148, 178, 255, 0.04));
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  backdrop-filter: blur(14px) saturate(1.4);
-  border: 1px solid rgba(148, 178, 255, 0.18);
-  transition: color 250ms, border-color 250ms, transform 250ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 250ms;
+  color: var(--ink-70);
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(24px) saturate(1.1);
+  backdrop-filter: blur(24px) saturate(1.1);
+  border: 1px solid var(--ink-10);
+  transition:
+    color var(--dur-fast),
+    border-color var(--dur-fast),
+    transform var(--dur-fast) var(--ease-out-expo),
+    box-shadow var(--dur-fast);
 }
 .glass-pill:hover {
-  color: var(--text-hi);
-  border-color: rgba(148, 178, 255, 0.38);
+  color: var(--ink);
+  border-color: var(--ink-30);
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px -10px rgba(30, 143, 242, 0.45);
+  box-shadow: 0 8px 28px -10px rgba(47, 111, 237, 0.35);
 }
 @media (prefers-reduced-motion: reduce) {
   .glass-pill:hover {
@@ -279,24 +289,128 @@ body {
   }
 }
 
-/* Cinematic hero video stage: raw object-fit cover, NO overlay/dimming. */
-.hero-video-stage {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-.hero-video-stage video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 /* Character-staggered headline entrance. */
 .char-rise {
   display: inline-block;
   will-change: transform, opacity;
   white-space: pre;
+}
+
+/* THE THREAD · VEX opening state: dot + short stroke + traveling pulse. */
+.thread-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8vw;
+  pointer-events: none;
+}
+.thread-halo {
+  position: relative;
+  width: min(46vw, 560px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(228, 218, 198, 0.35), rgba(228, 218, 198, 0) 68%);
+}
+.thread-halo svg {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+}
+.thread-draw {
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  animation: thread-draw 1200ms var(--ease-out-expo) 400ms forwards;
+}
+@keyframes thread-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.thread-pulse {
+  offset-path: path("M 60 300 H 500");
+  offset-distance: 0%;
+  animation: thread-travel var(--dur-motif-pulse) linear 1800ms infinite;
+  opacity: 0;
+}
+@keyframes thread-travel {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* THE THREAD · LUMINA resolution: closed ring along footer top edge. */
+.thread-edge {
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  animation: thread-edge-draw 1400ms var(--ease-out-expo) 200ms forwards;
+}
+@keyframes thread-edge-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.thread-loop-dot {
+  animation: thread-dot-pop 500ms var(--ease-out-expo) 1500ms both;
+}
+@keyframes thread-dot-pop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.thread-edge-pulse {
+  offset-path: path("M 0 118 H 380 C 470 118 500 20 600 20 C 700 20 730 118 820 118 H 1200");
+  offset-distance: 0%;
+  animation: thread-travel-long 4800ms linear 2200ms infinite;
+  opacity: 0;
+}
+@keyframes thread-travel-long {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thread-draw,
+  .thread-edge {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .thread-pulse,
+  .thread-edge-pulse {
+    display: none;
+  }
+  .thread-loop-dot {
+    animation: none;
+    opacity: 1;
+  }
 }
 
 /* Guard against horizontal overflow on small screens. */
@@ -308,14 +422,14 @@ body {
 /* Process timeline step states (driven by scroll progress; fully active
    without JS / under reduced motion). */
 .process-step-dot {
-  background: var(--bg, #05070a);
+  background: var(--bg);
 }
 .process-step-active .process-step-dot {
-  background: var(--azure);
-  border-color: var(--azure);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 .process-step-active .process-step-label {
-  color: var(--text-hi);
+  color: var(--ink);
 }
 
 /* Final CTA success check draw-in */
@@ -346,5 +460,18 @@ body {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .thread-pulse,
+  .thread-edge-pulse {
+    display: none !important;
+  }
+  .thread-draw,
+  .thread-edge {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+  .thread-loop-dot {
+    opacity: 1 !important;
+    animation: none !important;
   }
 }

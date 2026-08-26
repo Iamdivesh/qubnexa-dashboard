@@ -45,7 +45,7 @@ export function ChapterRail() {
         <li key={item.href} data-rail-item className="flex items-center gap-3">
           <span
             aria-hidden
-            className="rail-tick block h-[2px] w-6 rounded-full bg-text-low/60 transition-all duration-300"
+            className="rail-tick block h-[2px] w-6 rounded-full bg-ink/30 transition-all duration-300"
           />
           <span className="metadata-mono text-text-low opacity-0 transition-opacity duration-300">
             {item.index} {item.label}

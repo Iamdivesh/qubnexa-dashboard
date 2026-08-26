@@ -22,6 +22,11 @@ const CAMERA_KEYS: Record<string, CameraKey> = {
   build: { pos: [0, 0.4, 11.2], look: [0, 0, 0], offset: 0 },
   automate: { pos: [0, 0.3, 10.8], look: [0, 0.1, 0], offset: 0 },
   intelligence: { pos: [0, 0.3, 10.4], look: [0, 0.1, 0], offset: 0 },
+  grow: { pos: [0, 0.35, 12.2], look: [0, 0.1, 0], offset: -0.9 },
+  connected: { pos: [0, 0.25, 6.8], look: [0, 0.2, 0], offset: 0 },
+  services: { pos: [0, 0.35, 13.5], look: [0, 0, 0], offset: 0.8 },
+  process: { pos: [0, 0.35, 13.5], look: [0, 0, 0], offset: -0.8 },
+  cta: { pos: [0, 0.25, 6.2], look: [0, 0.15, 0], offset: 0 },
 };
 
 const lookTarget = new THREE.Vector3(0, 0.3, 0);

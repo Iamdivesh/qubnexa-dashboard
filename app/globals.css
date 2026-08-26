@@ -198,6 +198,40 @@ body {
   opacity: 0;
 }
 
+/* Process timeline step states (driven by scroll progress; fully active
+   without JS / under reduced motion). */
+.process-step-dot {
+  background: var(--bg, #05070a);
+}
+.process-step-active .process-step-dot {
+  background: var(--azure);
+  border-color: var(--azure);
+}
+.process-step-active .process-step-label {
+  color: var(--text-hi);
+}
+
+/* Final CTA success check draw-in */
+@keyframes cta-check-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.cta-check-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: cta-check-draw 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-check-path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

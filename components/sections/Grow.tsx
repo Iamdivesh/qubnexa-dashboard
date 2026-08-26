@@ -50,7 +50,7 @@ function ChannelRing() {
                 onMouseLeave={() => setHighlight(null)}
                 onFocus={() => setHighlight(channel.toLowerCase())}
                 onBlur={() => setHighlight(null)}
-                className={`metadata-mono -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-[2px] border px-3 py-1.5 transition-all duration-200 ${
+                className={`metadata-mono -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-[2px] border px-4 py-2.5 transition-all duration-200 ${
                   active === channel
                     ? "border-azure text-text-hi"
                     : "border-border text-text-mid hover:text-text-hi"

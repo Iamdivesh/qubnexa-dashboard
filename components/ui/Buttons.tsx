@@ -8,7 +8,7 @@ export function ButtonPrimary({
   external,
 }: {
   href: string;
-  children: string;
+  children: React.ReactNode;
   className?: string;
   external?: boolean;
 }) {

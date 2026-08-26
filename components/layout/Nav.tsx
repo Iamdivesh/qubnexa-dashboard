@@ -50,7 +50,8 @@ export function Nav() {
           ))}
         </nav>
         <ButtonPrimary href={cta.mailto} external className="h-10 px-5">
-          {cta.primary}
+          <span className="md:hidden">{cta.primaryShort}</span>
+          <span className="hidden md:inline">{cta.primary}</span>
         </ButtonPrimary>
       </div>
     </header>

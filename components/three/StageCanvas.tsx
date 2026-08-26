@@ -2,14 +2,16 @@
 
 import { useEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
-import { QOrbit } from "./QOrbit";
+import { AmbientScene } from "./AmbientScene";
 import { threeStore } from "@/lib/three-store";
 import { usePrefersReducedMotion } from "@/lib/use-motion-preferences";
 
 function TierSetup() {
   const setDpr = useThree((s) => s.setDpr);
   useEffect(() => {
-    setDpr(threeStore.tier === "low" ? 1.5 : Math.min(window.devicePixelRatio, 2));
+    // Mobile: cap DPR harder — the ambient scene is subtle, sharpness budget
+    // is better spent on text.
+    setDpr(threeStore.tier === "low" ? 1.25 : Math.min(window.devicePixelRatio, 2));
   }, [setDpr]);
   return null;
 }
@@ -57,7 +59,7 @@ export default function StageCanvas() {
   return (
     <Canvas
       className="absolute inset-0"
-      camera={{ position: [0, 0.35, 7.8], fov: 42 }}
+      camera={{ position: [0, 0, 8], fov: 45 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       frameloop={reduced ? "demand" : "always"}
       onCreated={(state) => {
@@ -68,7 +70,7 @@ export default function StageCanvas() {
       <RenderGuard />
       <PointerTrack />
       <ReducedStatic />
-      <QOrbit />
+      <AmbientScene />
     </Canvas>
   );
 }

@@ -107,7 +107,7 @@ export function FinalCta() {
     <section id="cta" aria-labelledby="cta-title" className="chapter">
       <p className="sr-only">{finalCta.summary}</p>
       <div className="container-x w-full">
-        <div className="grid items-start gap-16 lg:grid-cols-2">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <p id="cta-title" className="label-mono text-text-mid">
               <span className="text-azure">{finalCta.index}</span>
@@ -139,7 +139,7 @@ export function FinalCta() {
             </ol>
           </div>
 
-          <div className="border border-border p-8 md:p-10">
+          <div className="border border-border p-6 sm:p-8 md:p-10">
             {status === "success" ? (
               <div className="flex min-h-[24rem] flex-col items-center justify-center gap-6 text-center" role="status">
                 <SuccessCheck />

@@ -3,6 +3,8 @@ export const cta = {
   secondary: "Explore capabilities",
   mailto:
     "mailto:hello@qubnexa.com?subject=Intro%20call%20%E2%80%94%20QubNexa",
+  /** Short label used below md, where the nav shows brand + CTA only. */
+  primaryShort: "Book a call",
 } as const;
 
 export const nav = {

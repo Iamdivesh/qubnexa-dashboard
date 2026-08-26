@@ -110,3 +110,19 @@ Written by: ScrollTrigger callbacks and DOM interaction handlers. Read by: `useF
 ## 11. Mobile & fallback summary
 
 Low tier counts/DPR per §8; simplified camera keys (fewer waypoints); pointer parallax and magnetic off; canvas retained for the System act with the stage policy, auto-degrade and static-poster escapes defined above.
+
+## 12. Ambient stage concept (revision — Q mark removed from background)
+
+Per product direction, the Q-Orbit mark no longer renders in the fixed
+background stage. The stage is now an **abstract ambient scene**
+(`components/three/AmbientScene.tsx`): a slow field of fine luminous particles
+(azure/sky/dust, additive, low opacity) plus sparse hairline connection
+filaments that gently breathe — evoking "connected systems" without logos or
+letterforms. A DOM radial vignette in `StageLayer` dissolves the edges so the
+scene never renders at full contrast behind text.
+
+Per-chapter treatment (lerped in-scene + CSS opacity/blur transition on the
+stage wrapper): hero 1.0 → build 0.8 → automate/intelligence 0.68 → grow 0.42 →
+connected 0.92 (convergence moment) → services 0.16 → process 0.14 → cta 0.45.
+The two hero moments stay strongest; content-heavy chapters are near-invisible
+ambience. No-WebGL fallback is two drifting CSS gradient blobs.

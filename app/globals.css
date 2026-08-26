@@ -175,12 +175,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-block: 7rem;
+  padding-block: clamp(5.5rem, 12svh, 7rem);
 }
 
 .chapter[data-pinned="true"] {
   min-height: 100vh;
-  padding-block: 6rem 5rem;
+  padding-block: clamp(4.5rem, 10svh, 6rem) clamp(3.5rem, 8svh, 5rem);
 }
 
 .chapter[data-pinned="true"] .swap {
@@ -196,6 +196,32 @@ body {
   flex-direction: column;
   justify-content: center;
   opacity: 0;
+}
+
+/* No-WebGL ambient fallback blobs — extremely slow drift only. */
+@keyframes ambient-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4%, -3%, 0) scale(1.06);
+  }
+}
+
+.ambient-blob {
+  animation: ambient-drift 26s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-blob {
+    animation: none;
+  }
+}
+
+/* Guard against horizontal overflow on small screens. */
+html,
+body {
+  overflow-x: clip;
 }
 
 /* Process timeline step states (driven by scroll progress; fully active

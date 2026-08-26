@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QubNexa — Footer preview (LUMINA liquid glass)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #000; color: #fff; font-family: 'Inter', sans-serif;
+         -webkit-font-smoothing: antialiased; }
+  .stage { position: relative; min-height: 100vh; overflow: hidden; padding: 0 24px; }
+  @media(min-width:768px){ .stage{ padding: 0 40px; } }
+  @media(min-width:1024px){ .stage{ padding: 0 64px; } }
+  video.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;
+             filter: blur(2px) brightness(0.6); }
+  .liquid-glass {
+    background: rgba(255,255,255,0.01);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+    position: relative; overflow: hidden;
+  }
+  .liquid-glass::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+    background: linear-gradient(180deg, rgba(255,255,255,.3) 0%, rgba(255,255,255,.1) 20%,
+      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,.1) 80%, rgba(255,255,255,.3) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+  }
+  footer { margin-top: 128px; max-width: 1360px; margin-inline: auto;
+           animation: rise 1s ease-out .4s both; padding-bottom: 48px; }
+  @media(min-width:768px){ footer{ margin-top: 256px; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+  .panel { border-radius: 24px; padding: 40px 24px; }
+  @media(min-width:768px){ .panel{ padding: 56px 48px; } }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+  @media(min-width:768px){ .grid { grid-template-columns: repeat(12, 1fr); gap: 32px; } }
+  .brand { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; text-decoration: none; color: #fff; }
+  .desc { margin-top: 16px; max-width: 38ch; font-size: .875rem; line-height: 1.625; color: rgb(255 255 255 / .7); }
+  @media(min-width:768px){ .brand-col{ grid-column: span 5 / span 5; } .links-col{ grid-column: span 7 / span 7; } }
+  .cols3 { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 32px; }
+  h3 { font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; color: #fff; font-weight: 500; margin-bottom: 16px; }
+  ul { list-style: none; padding: 0; }
+  li + li { margin-top: 8px; }
+  a.link { font-size: .75rem; color: rgb(255 255 255 / .6); text-decoration: none; transition: color .2s; }
+  a.link:hover { color: #fff; }
+  .bottom { margin-top: 48px; display: flex; flex-direction: column; gap: 24px; align-items: flex-start;
+            justify-content: space-between; border-top: 1px solid rgb(255 255 255 / .1); padding-top: 24px; }
+  @media(min-width:640px){ .bottom{ flex-direction: row; align-items: center; } }
+  .copyright { font-size: .625rem; text-transform: uppercase; letter-spacing: .1em; color: #fff; opacity: .5; }
+  .socials { display: flex; align-items: center; gap: 16px; }
+  .socials a { color: rgb(255 255 255 / .5); transition: color .2s; display: inline-flex; }
+  .socials a:hover { color: #fff; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <video class="bg" src="../public/media/hero-abstract-lines.mp4" autoplay muted loop playsinline></video>
+  <footer>
+    <div class="panel liquid-glass">
+      <div class="grid">
+        <div class="brand-col">
+          <a class="brand" href="#">QubNexa</a>
+          <p class="desc">QubNexa connects digital systems, automation and AI to help businesses operate better and grow faster.</p>
+        </div>
+        <div class="links-col">
+          <div class="cols3">
+            <div>
+              <h3>Services</h3>
+              <ul>
+                <li><a class="link" href="#">AI Automation</a></li>
+                <li><a class="link" href="#">Business Automation</a></li>
+                <li><a class="link" href="#">Web Development</a></li>
+                <li><a class="link" href="#">App Development</a></li>
+                <li><a class="link" href="#">SaaS Development</a></li>
+                <li><a class="link" href="#">Growth Marketing</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Company</h3>
+              <ul>
+                <li><a class="link" href="#">About</a></li>
+                <li><a class="link" href="#">Insights</a></li>
+                <li><a class="link" href="#">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Legal &amp; Contact</h3>
+              <ul>
+                <li><a class="link" href="mailto:hello@qubnexa.com">hello@qubnexa.com</a></li>
+                <li><a class="link" href="#">Privacy Policy</a></li>
+                <li><a class="link" href="#">Terms &amp; Conditions</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <p class="copyright">© QUBNEXA. ALL RIGHTS RESERVED.</p>
+        <div class="socials">
+          <a aria-label="LinkedIn" href="#"><i data-lucide="linkedin" style="width:16px;height:16px"></i></a>
+          <a aria-label="X" href="#"><i data-lucide="twitter" style="width:16px;height:16px"></i></a>
+          <a aria-label="Instagram" href="#"><i data-lucide="instagram" style="width:16px;height:16px"></i></a>
+          <a aria-label="YouTube" href="#"><i data-lucide="youtube" style="width:16px;height:16px"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<script>lucide.createIcons();</script>
+</body>
+</html>

@@ -28,7 +28,7 @@ function validate(form: FormState): Errors {
 }
 
 const inputClass =
-  "h-12 w-full rounded-[2px] border border-border bg-transparent px-4 text-[0.9375rem] text-text-hi placeholder:text-text-low transition-colors duration-200 focus:border-azure focus:outline-none";
+  "h-12 w-full rounded-lg border border-border-strong bg-bg/40 px-4 text-[0.9375rem] text-text-hi placeholder:text-text-mid transition-colors duration-200 focus:border-azure focus:outline-none focus:ring-1 focus:ring-azure/50";
 
 function Field({
   label,
@@ -139,7 +139,7 @@ export function FinalCta() {
             </ol>
           </div>
 
-          <div className="border border-border p-6 sm:p-8 md:p-10">
+          <div className="liquid-glass p-6 sm:p-8 md:p-10">
             {status === "success" ? (
               <div className="flex min-h-[24rem] flex-col items-center justify-center gap-6 text-center" role="status">
                 <SuccessCheck />
@@ -209,7 +209,7 @@ export function FinalCta() {
                       rows={4}
                       value={form.message}
                       onChange={set("message")}
-                      className="mt-2 w-full rounded-[2px] border border-border bg-transparent px-4 py-3 text-[0.9375rem] leading-[1.6] text-text-hi placeholder:text-text-low transition-colors duration-200 focus:border-azure focus:outline-none"
+                      className="mt-2 w-full rounded-lg border border-border-strong bg-bg/40 px-4 py-3 text-[0.9375rem] leading-[1.6] text-text-hi placeholder:text-text-mid transition-colors duration-200 focus:border-azure focus:outline-none focus:ring-1 focus:ring-azure/50"
                       placeholder="Where is the friction?"
                     />
                   </label>

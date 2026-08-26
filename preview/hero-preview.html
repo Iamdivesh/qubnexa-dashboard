@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QubNexa — Hero preview (VEX spec)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #000; color: #fff; font-family: 'Inter', sans-serif;
+         -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  .liquid-glass {
+    background: rgba(255,255,255,0.01);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+    position: relative; overflow: hidden;
+  }
+  .liquid-glass::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+    background: linear-gradient(180deg, rgba(255,255,255,.3) 0%, rgba(255,255,255,.1) 20%,
+      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,.1) 80%, rgba(255,255,255,.3) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+  }
+  video.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  header { position: fixed; top: 0; left: 0; right: 0; z-index: 10; padding: 24px 16px; }
+  @media(min-width:768px){ header{ padding: 24px 32px 24px 48px; } }
+  .navbar { max-width: 1360px; margin: auto; display: flex; align-items: center; justify-content: space-between;
+            border-radius: 12px; padding: 8px 16px; }
+  .logo { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; color: #fff; }
+  nav.links { display: none; gap: 32px; }
+  @media(min-width:768px){ nav.links { display: flex; } }
+  nav.links a { font-size: .875rem; color: #fff; text-decoration: none; transition: color .2s; }
+  nav.links a:hover { color: #d1d5db; }
+  .cta-btn { background: #fff; color: #000; padding: 8px 24px; border-radius: 8px; font-size: .875rem;
+             font-weight: 500; text-decoration: none; transition: background .2s; }
+  .cta-btn:hover { background: #f3f4f6; }
+  main { position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column;
+         justify-content: flex-end; max-width: 1440px; margin: auto;
+         padding: 0 24px 48px; }
+  @media(min-width:768px){ main{ padding: 0 40px 64px; } }
+  @media(min-width:1024px){ main{ padding: 0 64px 64px; } }
+  h1 { font-size: clamp(2.25rem, 6vw, 4.5rem); font-weight: 400; letter-spacing: -0.04em; margin-bottom: 16px; line-height: 1.08; }
+  h1 span.ch { display: inline-block; opacity: 0; transform: translateX(-18px);
+               transition: opacity .5s ease, transform .5s ease; }
+  .sub { font-size: 1rem; color: #d1d5db; margin-bottom: 20px; max-width: 52ch; opacity: 0; transition: opacity 1s ease; }
+  @media(min-width:768px){ .sub{ font-size: 1.125rem; } }
+  .buttons { display: flex; flex-wrap: wrap; gap: 16px; opacity: 0; transition: opacity 1s ease; }
+  .btn { padding: 12px 32px; border-radius: 8px; font-weight: 500; text-decoration: none; font-size: 1rem; }
+  .btn-solid { background: #fff; color: #000; }
+  .btn-glass { color: #fff; border-radius: 8px; transition: all .3s; }
+  .btn-glass:hover { background: #fff; color: #000; }
+  .tagwrap { display: flex; align-items: flex-start; justify-content: flex-start; margin-top: 40px;
+             opacity: 0; transition: opacity 1s ease; }
+  @media(min-width:1024px){ .tagwrap{ align-items: flex-end; justify-content: flex-end; margin-top: 0; } }
+  .grid2 { display: grid; grid-template-columns: 1fr; }
+  @media(min-width:1024px){ .grid2{ grid-template-columns: 1fr 1fr; align-items: end; } }
+  .tag { border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); padding: 12px 24px;
+         font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 300; }
+</style>
+</head>
+<body>
+<video class="bg" src="/media/hero-abstract-lines.mp4" autoplay muted loop playsinline></video>
+<header>
+  <div class="navbar liquid-glass">
+    <a class="logo" href="#">QubNexa</a>
+    <nav class="links">
+      <a href="#build">Build</a><a href="#automate">Automate</a><a href="#intelligence">Intelligence</a><a href="#services">Services</a><a href="#process">Process</a>
+    </nav>
+    <a class="cta-btn" href="mailto:hello@qubnexa.com">Book an intro call</a>
+  </div>
+</header>
+<main>
+  <div class="grid2">
+    <div>
+      <h1 id="headline" aria-label="Build Better. Automate Smarter. Grow Faster."></h1>
+      <p class="sub" id="sub">QubNexa builds the digital systems your business runs on, automates the workflows that slow it down, and applies AI where it creates practical value.</p>
+      <div class="buttons" id="buttons">
+        <a class="btn btn-solid" href="#">Book an intro call</a>
+        <a class="btn btn-glass liquid-glass" style="border-color:rgba(255,255,255,0.2)" href="#build">Explore capabilities</a>
+      </div>
+    </div>
+    <div class="tagwrap" id="tag">
+      <div class="tag liquid-glass">Technology. Automation. Growth.</div>
+    </div>
+  </div>
+</main>
+<script>
+  // VEX character entrance: charDelay 30ms, initial delay 200ms, 500ms transitions.
+  const lines = ["Build Better.", "Automate Smarter.", "Grow Faster."];
+  let idx = 0;
+  lines.forEach(line => {
+    for (const ch of line) {
+      const s = document.createElement("span");
+      s.className = "ch";
+      s.textContent = ch === " " ? "\u00A0" : ch;
+      s.style.transitionDelay = `${idx++ * 30}ms`;
+      document.getElementById("headline").appendChild(s);
+    }
+  });
+  setTimeout(() => document.querySelectorAll(".ch").forEach(s => {
+    s.style.opacity = 1; s.style.transform = "translateX(0)";
+  }), 200);
+  setTimeout(() => document.getElementById("sub").style.opacity = 1, 800);
+  setTimeout(() => document.getElementById("buttons").style.opacity = 1, 1200);
+  setTimeout(() => document.getElementById("tag").style.opacity = 1, 1400);
+</script>
+</body>
+</html>

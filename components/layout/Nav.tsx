@@ -29,9 +29,9 @@ export function Nav() {
   return (
     <header
       ref={ref}
-      className="fixed inset-x-0 top-0 z-20 border-b border-border bg-bg/80 backdrop-blur-sm"
+      className="fixed inset-x-0 top-0 z-20 px-4 pt-4 md:px-8"
     >
-      <div className="container-x flex h-16 items-center justify-between">
+      <div className="liquid-glass container-x mx-auto flex h-14 max-w-[1360px] items-center justify-between !rounded-2xl px-5">
         <a
           href="#hero"
           className="text-[1.0625rem] font-semibold tracking-[-0.01em] text-text-hi"
@@ -49,7 +49,7 @@ export function Nav() {
             </a>
           ))}
         </nav>
-        <ButtonPrimary href={cta.mailto} external className="h-10 px-5">
+        <ButtonPrimary href={cta.mailto} external className="h-10 rounded-full px-5">
           <span className="md:hidden">{cta.primaryShort}</span>
           <span className="hidden md:inline">{cta.primary}</span>
         </ButtonPrimary>

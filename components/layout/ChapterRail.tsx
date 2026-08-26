@@ -39,11 +39,14 @@ export function ChapterRail() {
     <ul
       ref={listRef}
       aria-hidden="true"
-      className="fixed left-6 top-1/2 z-20 hidden -translate-y-1/2 flex-col gap-4 lg:flex"
+      className="fixed left-6 top-1/2 z-20 hidden m-0 list-none p-0 -translate-y-1/2 flex-col gap-4 lg:flex"
     >
       {rail.items.map((item) => (
         <li key={item.href} data-rail-item className="flex items-center gap-3">
-          <span className="rail-tick h-px w-6 bg-text-low transition-all duration-300" />
+          <span
+            aria-hidden
+            className="rail-tick block h-[2px] w-6 rounded-full bg-text-low/60 transition-all duration-300"
+          />
           <span className="metadata-mono text-text-low opacity-0 transition-opacity duration-300">
             {item.index} {item.label}
           </span>

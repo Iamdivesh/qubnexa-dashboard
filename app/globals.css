@@ -217,6 +217,18 @@ body {
   opacity: 0;
 }
 
+/* Typewriter cursor (Mainframe hero). */
+.hero-cursor {
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-cursor { animation: none; }
+}
+
 /* Light liquid-glass formulation (docs/theme-light.md §3): ink-on-paper. */
 .liquid-glass {
   background: rgba(255, 255, 255, 0.55);

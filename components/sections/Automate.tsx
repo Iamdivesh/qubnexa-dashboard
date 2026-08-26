@@ -15,12 +15,24 @@ export function Automate() {
       AUTOMATE_STAGE_WINDOWS.forEach(([start], i) => {
         const el = stages[i];
         if (!el) return;
+        // Enter fully from invisible — a 0.2 resting opacity stacks all four
+        // absolutely-positioned stages on top of each other (text overlap).
         tl.fromTo(
           el,
-          { opacity: 0.2, y: 14 },
+          { opacity: 0, y: 14 },
           { opacity: 1, y: 0, duration: 0.06, ease: "out-expo" },
           start
         );
+        // Exit BEFORE the next stage enters so two stages are never visible
+        // at once. The final stage holds until the pin releases.
+        const nextStart = AUTOMATE_STAGE_WINDOWS[i + 1]?.[0];
+        if (nextStart !== undefined) {
+          tl.to(
+            el,
+            { opacity: 0, y: -14, duration: 0.045, ease: "inout" },
+            nextStart - 0.055
+          );
+        }
       });
       const fill = scope.querySelector("[data-readout-fill]");
       if (fill) {

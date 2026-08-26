@@ -24,8 +24,11 @@ export function Build() {
           start
         ).to(
           el,
+          // Finish the exit slightly BEFORE the window ends (= the next
+          // track's entry point) so consecutive tracks never crossfade in
+          // the same absolute-positioned space (text overlap).
           { opacity: 0, y: -28, duration: span * 0.3, ease: "inout" },
-          end - span * 0.3
+          end - span * 0.36
         );
       });
     },

@@ -1,168 +1,204 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { cta, hero } from "@/content/site";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Check } from "lucide-react";
+import { build, cta, hero } from "@/content/site";
 import { scrollToId } from "@/lib/scroll";
 import { threeStore } from "@/lib/three-store";
 import { usePrefersReducedMotion } from "@/lib/use-motion-preferences";
 
 /**
- * VEX hero on light tokens (docs/vex-lumina-rebuild.md §1).
- * The video stage is retired; The Thread opening state (dot + short stroke +
- * traveling pulse) is the single signature effect. Char-stagger headline at
- * 30ms/char within a 500ms window from translateX(-18px); staged fades
- * 800/1200/1400ms for headline → supporting → CTAs + nav.
+ * Mainframe-style interactive video hero on QubNexa's light tokens.
+ * - Background video: mouse-scrubbed on desktop (≥1024px), autoplay below.
+ * - Typewriter headline with blinking cursor.
+ * - Multi-select service pills with a live inquiry banner.
+ * - The Thread opening state kept as a subtle brand signature near the tag.
  */
 
-const CHAR_DELAY = 30; // ms between characters
-const INITIAL_DELAY = 200; // ms before the headline starts
+const HERO_TEXT = "Build Better.\nAutomate Smarter.\nGrow Faster.";
 
-/** VEX FadeIn: opacity 0 → 1 after `delay` ms over `duration` ms. */
-function FadeIn({
-  delay,
-  duration = 800,
-  className,
-  children,
-}: {
-  delay: number;
-  duration?: number;
-  className?: string;
-  children: React.ReactNode;
-}) {
-  const [shown, setShown] = useState(false);
+/** Custom typewriter hook: reveals `text` char by char after `startDelay`. */
+function useTypewriter(text: string, speed = 38, startDelay = 600) {
   const reduced = usePrefersReducedMotion();
+  const [displayed, setDisplayed] = useState(() => (reduced ? text : ""));
+  const [done, setDone] = useState(reduced);
 
   useEffect(() => {
     if (reduced) {
-      setShown(true);
+      setDisplayed(text);
+      setDone(true);
       return;
     }
-    const t = setTimeout(() => setShown(true), delay);
-    return () => clearTimeout(t);
-  }, [delay, reduced]);
+    let interval: ReturnType<typeof setInterval> | undefined;
+    const timeout = setTimeout(() => {
+      let i = 0;
+      interval = setInterval(() => {
+        i += 1;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length) {
+          if (interval) clearInterval(interval);
+          setDone(true);
+        }
+      }, speed);
+    }, startDelay);
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
+  }, [text, speed, startDelay, reduced]);
 
-  return (
-    <div
-      style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? "translateY(0)" : "translateY(16px)",
-        transition:
-          "opacity 800ms cubic-bezier(0.16,1,0.3,1), transform 800ms cubic-bezier(0.16,1,0.3,1)",
-        transitionDuration: `${duration}ms`,
-      }}
-      className={className}
-    >
-      {children}
-    </div>
-  );
+  return { displayed, done };
 }
 
-/** Character-by-character horizontal slide-in per the VEX spec. */
-function AnimatedHeading({ lines }: { lines: readonly string[] }) {
-  const [on, setOn] = useState(false);
-  const reduced = usePrefersReducedMotion();
-
-  useEffect(() => {
-    if (reduced) {
-      setOn(true);
-      return;
-    }
-    const t = setTimeout(() => setOn(true), INITIAL_DELAY);
-    return () => clearTimeout(t);
-  }, [reduced]);
-
-  let charCursor = 0;
-  return (
-    <h1
-      id="hero-title"
-      aria-label={lines.join(" ")}
-      className="mb-4 text-[clamp(2.75rem,7vw,5.75rem)] font-bold leading-[1.02] tracking-[-0.03em] text-text-hi"
-    >
-      {lines.map((line, lineIndex) => (
-        <span key={lineIndex} className="block">
-          {Array.from(line).map((ch, charIndex) => {
-            const globalIndex = charCursor++;
-            if (ch === " ") return <span key={`${lineIndex}-${charIndex}`}>&nbsp;</span>;
-            return (
-              <span
-                key={`${lineIndex}-${charIndex}`}
-                aria-hidden="true"
-                className="inline-block"
-                style={{
-                  opacity: on ? 1 : 0,
-                  transform: on ? "translateX(0)" : "translateX(-18px)",
-                  transition:
-                    "opacity 500ms cubic-bezier(0.16,1,0.3,1), transform 500ms cubic-bezier(0.16,1,0.3,1)",
-                  transitionDelay: `${globalIndex * CHAR_DELAY}ms`,
-                }}
-              >
-                {ch}
-              </span>
-            );
-          })}
-        </span>
-      ))}
-    </h1>
-  );
-}
+const VIDEO_SRC = "/media/hero-mainframe.mp4";
 
 /**
- * THE THREAD · chapter 01 ignition state.
- * Azure dot emits a short ink stroke; one pulse travels it (2400ms loop).
+ * Desktop mouse scrubbing: horizontal mouse movement scrubs the video
+ * timeline; screens < 1024px fall back to normal autoplay playback.
  */
-function ThreadStage() {
+function useMouseScrub(
+  videoRef: React.RefObject<HTMLVideoElement | null>,
+  enabled: boolean
+) {
+  useEffect(() => {
+    if (!enabled) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Wait until metadata is available before scrubbing.
+    let duration = video.duration;
+    const onMeta = () => {
+      duration = video.duration;
+    };
+    video.addEventListener("loadedmetadata", onMeta);
+
+    let targetTime = video.currentTime || 0;
+    let previousX: number | null = null;
+
+    const onMouseMove = (event: MouseEvent) => {
+      if (!Number.isFinite(duration) || duration <= 0) return;
+      if (window.innerWidth < 1024) return;
+      const x = event.clientX;
+      const delta =
+        previousX === null ? 0 : ((x - previousX) / window.innerWidth) * 0.8 * duration;
+      previousX = x;
+      targetTime = Math.min(duration, Math.max(0, targetTime + delta));
+      video.currentTime = targetTime;
+    };
+
+    const onSeeked = () => {
+      // Keeps tracking smooth as seeks settle.
+      targetTime = video.currentTime;
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    video.addEventListener("seeked", onSeeked);
+    return () => {
+      video.removeEventListener("loadedmetadata", onMeta);
+      window.removeEventListener("mousemove", onMouseMove);
+      video.removeEventListener("seeked", onSeeked);
+    };
+  }, [videoRef, enabled]);
+}
+
+/** THE THREAD · opening state, compact signature beside the eyebrow tag. */
+function ThreadMark() {
   return (
-    <div className="thread-stage" aria-hidden>
-      <div className="thread-halo">
-        <svg viewBox="0 0 600 600">
-          {/* THE THREAD · opening state: dot + short stroke */}
-          <circle cx="60" cy="300" r="9" fill="#2F6FED" />
-          <path
-            className="thread-draw"
-            d="M 60 300 H 500"
-            fill="none"
-            stroke="#0B1E3D"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          <path
-            d="M 500 300 h 40"
-            stroke="#0B1E3D"
-            strokeWidth="3"
-            opacity=".18"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-        <svg viewBox="0 0 600 600" style={{ pointerEvents: "none" }}>
-          <circle className="thread-pulse" r="6" fill="#2F6FED" />
-        </svg>
-      </div>
-    </div>
+    <svg
+      viewBox="0 0 220 24"
+      className="h-6 w-[180px]"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle cx="10" cy="12" r="5" fill="#2F6FED" />
+      <path
+        d="M 18 12 H 170"
+        stroke="#0B1E3D"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity="0.85"
+      />
+      <path d="M 174 12 h 36" stroke="#0B1E3D" strokeWidth="2.5" strokeLinecap="round" opacity="0.15" />
+      <circle cx="94" cy="12" r="3.5" fill="#2F6FED">
+        <animate
+          attributeName="cx"
+          values="18;170;18"
+          dur="2400ms"
+          repeatCount="indefinite"
+        />
+      </circle>
+    </svg>
   );
 }
 
-/** Eyebrow chips: AI | AUTOMATION | INNOVATION on sand tint. */
-function EyebrowChips() {
+type PillProps = {
+  label: string;
+  active: boolean;
+  onToggle: () => void;
+};
+
+function ServicePill({ label, active, onToggle }: PillProps) {
   return (
-    <FadeIn delay={100}>
-      <div className="mb-6 flex flex-wrap gap-2.5">
-        {hero.eyebrowParts.map((part) => (
-          <span
-            key={part}
-            className="metadata-mono rounded-full border border-[rgba(138,109,59,0.25)] bg-sand-tint px-3.5 py-1.5 text-sand-deep"
+    <motion.button
+      type="button"
+      aria-pressed={active}
+      onClick={onToggle}
+      whileHover={{ y: -1 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 400, damping: 28 }}
+      className={`flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors duration-200 ${
+        active
+          ? "border-accent bg-accent text-white shadow-md"
+          : "border-ink bg-white text-ink hover:border-accent hover:text-accent"
+      }`}
+    >
+      <AnimatePresence initial={false}>
+        {active && (
+          <motion.span
+            key="check"
+            initial={{ opacity: 0, scale: 0.4 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.4 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="flex"
           >
-            {part}
-          </span>
-        ))}
-      </div>
-    </FadeIn>
+            <Check size={16} strokeWidth={3} />
+          </motion.span>
+        )}
+      </AnimatePresence>
+      {label}
+    </motion.button>
   );
 }
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const reduced = usePrefersReducedMotion();
+  const { displayed, done } = useTypewriter(HERO_TEXT);
+  const [selected, setSelected] = useState<string[]>([]);
+
+  const options = build.tracks.map((track) => track.label);
+
+  const toggle = useCallback((label: string) => {
+    setSelected((prev) =>
+      prev.includes(label)
+        ? prev.filter((item) => item !== label)
+        : [...prev, label]
+    );
+  }, []);
+
+  // Scrub only on desktop pointer devices; mobile autoplays instead.
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  useMouseScrub(videoRef, isDesktop && !reduced);
 
   // Ignition signal for downstream consumers (rail timing etc.).
   useEffect(() => {
@@ -175,89 +211,175 @@ export function Hero() {
     return () => cancelAnimationFrame(raf);
   }, [reduced]);
 
+  const bannerVisible = selected.length > 0;
+
   return (
     <section
       id="hero"
       ref={ref}
       aria-labelledby="hero-title"
-      className="relative flex min-h-[100svh] flex-col overflow-hidden bg-bg"
+      className="relative flex flex-col overflow-x-hidden overflow-y-hidden bg-bg font-sans text-ink antialiased lg:block lg:min-h-screen"
     >
-      {/* Faint dot-grid field (#0B1E3D @ 0.06, 24px pitch). */}
+      {/* BACKGROUND VIDEO — dominant visual */}
       <div
         aria-hidden
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 24px 24px, rgba(11,30,61,.06) 1.2px, transparent 1.2px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
-
-      {/* THE THREAD — signature effect */}
-      <ThreadStage />
+        className="pointer-events-none relative z-0 order-last w-full aspect-square overflow-hidden md:aspect-video lg:absolute lg:inset-0 lg:order-none lg:aspect-auto lg:h-full"
+      >
+        <video
+          ref={videoRef}
+          className="h-full w-full object-cover object-right lg:object-right-bottom"
+          src={VIDEO_SRC}
+          muted
+          playsInline
+          preload="auto"
+          autoPlay={!isDesktop || reduced ? true : false}
+        />
+      </div>
 
       <p className="sr-only">{hero.summary}</p>
 
-      {/* Bottom-anchored two-column grid */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end px-6 pb-14 md:px-10 lg:px-16 lg:pb-[9vh]">
-        <div className="lg:grid lg:grid-cols-[1.35fr_0.65fr] lg:items-end lg:gap-12">
-          {/* Left column */}
-          <div>
-            <EyebrowChips />
-            <AnimatedHeading lines={hero.lines} />
+      {/* CONTENT LAYER */}
+      <main className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 py-12">
+        {/* Eyebrow tag + Thread signature */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="mb-6 flex items-center gap-4">
+            <div className="metadata-mono flex items-center gap-2 text-text-low">
+              <span
+                aria-hidden
+                className="block h-[7px] w-[7px] shrink-0 rounded-full bg-accent shadow-[0_0_0_3px_rgba(47,111,237,0.18)]"
+              />
+              SYSTEM ONLINE
+            </div>
+            <ThreadMark />
+          </div>
+        </motion.div>
 
-            <FadeIn delay={1200} duration={800}>
-              <p className="mt-6 max-w-[52ch] text-base leading-relaxed text-text-mid md:text-[1.05rem]">
-                {hero.supporting}
-              </p>
-            </FadeIn>
+        {/* TYPEWRITER HEADLINE */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <h1
+            id="hero-title"
+            aria-label={HERO_TEXT.replace(/\n/g, " ")}
+            className="mb-8 whitespace-pre-wrap text-5xl font-normal leading-[1.08] tracking-tight text-text-hi md:text-6xl lg:text-[76px]"
+          >
+            {displayed}
+            {!done && (
+              <span
+                aria-hidden
+                className="ml-1 inline-block w-[2px] align-[-0.1em] h-[1.1em] bg-accent hero-cursor"
+              />
+            )}
+          </h1>
+        </motion.div>
 
-            <FadeIn delay={1400} duration={800}>
-              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
-                <a
-                  href={cta.mailto}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full bg-accent px-7 py-3 text-center text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(47,111,237,0.5)] transition-colors duration-200 hover:bg-accent-strong"
-                >
-                  {cta.primary}
-                </a>
-                <a
-                  href="#build"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    scrollToId("build");
-                  }}
-                  className="rounded-full border border-[rgba(11,30,61,0.25)] px-6 py-3 text-center text-sm font-semibold text-ink transition-colors duration-200 hover:border-[rgba(11,30,61,0.5)]"
-                >
-                  {cta.secondary}
-                </a>
-              </div>
-            </FadeIn>
+        {/* SUPPORTING COPY */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p className="mb-14 max-w-2xl text-lg leading-relaxed text-text-mid md:text-xl">
+            {hero.supporting}
+          </p>
+        </motion.div>
+
+        {/* INTERACTIVE MULTI-SELECT SERVICE PILLS */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p className="mb-2 text-2xl font-medium tracking-tight">
+            What sort of service?
+          </p>
+          <p className="mb-8 text-text-mid">Select all that apply</p>
+          <div className="flex max-w-xl flex-wrap gap-3">
+            {options.map((label) => (
+              <ServicePill
+                key={label}
+                label={label}
+                active={selected.includes(label)}
+                onToggle={() => toggle(label)}
+              />
+            ))}
           </div>
 
-          {/* Right column — glass tag card, bottom-right on large screens */}
-          <div className="mt-10 flex items-start justify-start lg:mt-0 lg:items-end lg:justify-end">
-            <FadeIn delay={1550} duration={800}>
-              <aside
-                aria-label="System status"
-                className="liquid-glass w-[240px] rounded-[18px] px-4 py-4"
-              >
-                <div className="metadata-mono flex items-center gap-2 text-text-low">
-                  <span
-                    aria-hidden
-                    className="block h-[7px] w-[7px] shrink-0 rounded-full bg-accent shadow-[0_0_0_3px_rgba(47,111,237,0.18)]"
-                  />
-                  SYSTEM ONLINE
-                </div>
-                <p className="mt-2 text-[0.78rem] leading-relaxed text-text-mid">
-                  The Thread is live — one line connecting build, automation and AI.
-                </p>
-              </aside>
-            </FadeIn>
+          {/* STATUS BANNER */}
+          <div className="mt-6 min-h-[64px]">
+            <AnimatePresence mode="wait">
+              {bannerVisible ? (
+                <motion.div
+                  key="banner"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  className="overflow-hidden"
+                >
+                  <div className="flex items-center justify-between gap-4 rounded-2xl border border-border bg-white px-5 py-4">
+                    <p className="text-sm text-text-mid">
+                      Ready to inquire about:{" "}
+                      <span className="font-medium text-ink">
+                        {selected.join(", ")}
+                      </span>
+                    </p>
+                    <a
+                      href="#cta"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        scrollToId("cta");
+                      }}
+                      className="flex shrink-0 items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-accent hover:text-accent-strong"
+                    >
+                      Let&apos;s Go
+                      <ArrowRight size={14} />
+                    </a>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.p
+                  key="placeholder"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-xs italic opacity-50"
+                >
+                  Select services to start an inquiry
+                </motion.p>
+              )}
+            </AnimatePresence>
           </div>
-        </div>
-      </div>
+
+          {/* CTAs */}
+          <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
+            <a
+              href={cta.mailto}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-accent px-7 py-3 text-center text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(47,111,237,0.5)] transition-colors duration-200 hover:bg-accent-strong"
+            >
+              {cta.primary}
+            </a>
+            <a
+              href="#build"
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToId("build");
+              }}
+              className="rounded-full border border-[rgba(11,30,61,0.25)] bg-white/60 px-6 py-3 text-center text-sm font-semibold text-ink backdrop-blur-sm transition-colors duration-200 hover:border-[rgba(11,30,61,0.5)]"
+            >
+              {cta.secondary}
+            </a>
+          </div>
+        </motion.div>
+      </main>
     </section>
   );
 }

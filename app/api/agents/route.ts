@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const AGENTS_DIR = "D:/Obsidian Vault/Projects/QubNexa/agency-agents";
+const HERMES_HOME = process.env.HERMES_HOME || "D:/QubNexa/hermes";
+const AGENTS_DIR = path.join(HERMES_HOME, "..", "Obsidian Vault", "Projects", "QubNexa", "agency-agents");
 
 export async function GET(request: NextRequest) {
   const file = request.nextUrl.searchParams.get("file");

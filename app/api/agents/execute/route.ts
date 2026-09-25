@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const QUEUE_DIR = "D:/QubNexa/hermes/cron/agent-queue";
+const HERMES_HOME = process.env.HERMES_HOME || "D:/QubNexa/hermes";
+const QUEUE_DIR = path.join(HERMES_HOME, "cron", "agent-queue");
 
 export async function POST(request: NextRequest) {
   try {

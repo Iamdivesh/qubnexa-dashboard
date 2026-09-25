@@ -16,7 +16,8 @@ from pathlib import Path
 HERMES_HOME = Path(os.environ.get("HERMES_HOME", "D:/QubNexa/hermes")).resolve()
 HERMES_BIN = HERMES_HOME / "bin" / "hermes.exe"
 QUEUE_DIR = HERMES_HOME / "cron" / "agent-queue"
-AGENTS_DIR = Path("D:/Obsidian Vault/Projects/QubNexa/agency-agents")
+# Resolve: D:\QubNexa\hermes -> drive D:\ -> Obsidian Vault\...
+AGENTS_DIR = Path(HERMES_HOME.drive + "\\") / "Obsidian Vault" / "Projects" / "QubNexa" / "agency-agents"
 OUTPUT_DIR = Path("D:/Obsidian Vault/Projects/QubNexa/Agents/Executions")
 MODEL = "upstage/solar-pro4:free"
 
@@ -88,7 +89,9 @@ def save_result_to_obsidian(execution_id: str, agent_name: str, result: str):
     output_dir = OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    filename = f"{execution_id}-{agent_name.replace(' ', '-')}.md"
+    # Strip .md from agent name if present, then add .md extension
+    clean_name = agent_name.replace('.md', '') if agent_name.endswith('.md') else agent_name
+    filename = f"{execution_id}-{clean_name.replace(' ', '-')}.md"
     filepath = output_dir / filename
     
     content = f"""---

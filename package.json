@@ -11,7 +11,8 @@
     "agency:seed": "npx tsx lib/db/seed.ts",
     "agency:run-report": "npx tsx lib/orchestrator-cli.ts",
     "agency:scrape": "python lib/agency/scrapers/test_scraper.py",
-    "agency:push-leads": "python lib/agency/push_leads.py"
+    "agency:push-leads": "python lib/agency/push_leads.py",
+    "agency:build-agents": "python lib/agency/build_agents_json.py"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.8",

@@ -6,24 +6,38 @@
  * to light values so existing token-driven sections stay readable.
  */
 :root {
-  /* Core palette */
+  /* Core palette - LIGHT (default) */
   --bg: #f7f9fc;
   --bg-raised: #ffffff;
+  --bg-muted: #eef2f7;
   --ink: #0b1e3d;
   --ink-70: rgba(11, 30, 61, 0.7);
   --ink-50: rgba(11, 30, 61, 0.5);
   --ink-30: rgba(11, 30, 61, 0.3);
   --ink-12: rgba(11, 30, 61, 0.12);
   --ink-10: rgba(11, 30, 61, 0.1);
+  --ink-6: rgba(11, 30, 61, 0.06);
   --accent: #2f6fed;
   --accent-strong: #1e54c7;
   --accent-tint: rgba(47, 111, 237, 0.1);
+  --accent-20: rgba(47, 111, 237, 0.2);
   --sand: #e4dac6;
   --sand-deep: #8a6d3b;
   --sand-tint: rgba(228, 218, 198, 0.35);
   --grid-line: rgba(11, 30, 61, 0.06);
+  --green: #16a34a;
+  --green-10: rgba(22, 163, 74, 0.1);
+  --green-700: rgba(22, 163, 74, 0.7);
+  --amber: #d97706;
+  --amber-10: rgba(217, 119, 6, 0.1);
+  --amber-deep: rgba(217, 119, 6, 0.8);
+  --red: #dc2626;
+  --red-10: rgba(220, 38, 38, 0.1);
+  --shadow-sm: 0 1px 2px rgba(11, 30, 61, 0.06);
+  --shadow-md: 0 4px 12px rgba(11, 30, 61, 0.08);
+  --shadow-lg: 0 8px 24px rgba(11, 30, 61, 0.1);
 
-  /* Legacy aliases → light values (blast-radius control) */
+  /* Legacy aliases → light values */
   --background: var(--bg);
   --surface: var(--bg-raised);
   --surface-strong: var(--bg-raised);
@@ -184,49 +198,37 @@ body {
 }
 
 /*
- * Pinned-chapter swap layout. Without JS (or under reduced motion) the
- * sections render as normal document flow; the pin setup opts them into
- * the stacked-swap layout by setting data-pinned="true".
+ * Page-enter animation — used on lead detail and selected dashboard panels.
+ * Fades in from a slight translate-down; no JS required.
  */
-.chapter {
-  position: relative;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-block: clamp(5.5rem, 12svh, 7rem);
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.chapter[data-pinned="true"] {
-  min-height: 100vh;
-  padding-block: clamp(4.5rem, 10svh, 6rem) clamp(3.5rem, 8svh, 5rem);
+.fade-in-up {
+  animation: fade-in-up 300ms var(--ease-out-expo) both;
 }
 
-.chapter[data-pinned="true"] .swap {
-  position: relative;
-  flex: 1;
-  min-height: 0;
-}
+/*
+ * Staggered child entrance — children with .fade-in-up get incremental delays.
+ * Usage: parent has .stagger-children; each child has .fade-in-up.
+ */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
 
-.chapter[data-pinned="true"] .swap-item {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  opacity: 0;
-}
-
-/* Typewriter cursor (Mainframe hero). */
-.hero-cursor {
-  animation: blink 1s step-end infinite;
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-cursor { animation: none; }
+.stagger-children .fade-in-up {
+  animation-delay: calc(var(--i, 0) * 60ms);
 }
 
 /* Light liquid-glass formulation (docs/theme-light.md §3): ink-on-paper. */
@@ -301,13 +303,6 @@ body {
   }
 }
 
-/* Character-staggered headline entrance. */
-.char-rise {
-  display: inline-block;
-  will-change: transform, opacity;
-  white-space: pre;
-}
-
 /* THE THREAD · VEX opening state: dot + short stroke + traveling pulse. */
 .thread-stage {
   position: absolute;
@@ -337,9 +332,7 @@ body {
   animation: thread-draw 1200ms var(--ease-out-expo) 400ms forwards;
 }
 @keyframes thread-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+  to { stroke-dashoffset: 0; }
 }
 .thread-pulse {
   offset-path: path("M 60 300 H 500");
@@ -348,20 +341,10 @@ body {
   opacity: 0;
 }
 @keyframes thread-travel {
-  0% {
-    offset-distance: 0%;
-    opacity: 0;
-  }
-  8% {
-    opacity: 1;
-  }
-  92% {
-    opacity: 1;
-  }
-  100% {
-    offset-distance: 100%;
-    opacity: 0;
-  }
+  0% { offset-distance: 0%; opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
 }
 
 /* THE THREAD · LUMINA resolution: closed ring along footer top edge. */
@@ -371,20 +354,14 @@ body {
   animation: thread-edge-draw 1400ms var(--ease-out-expo) 200ms forwards;
 }
 @keyframes thread-edge-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+  to { stroke-dashoffset: 0; }
 }
 .thread-loop-dot {
   animation: thread-dot-pop 500ms var(--ease-out-expo) 1500ms both;
 }
 @keyframes thread-dot-pop {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 .thread-edge-pulse {
   offset-path: path("M 0 118 H 380 C 470 118 500 20 600 20 C 700 20 730 118 820 118 H 1200");
@@ -393,20 +370,10 @@ body {
   opacity: 0;
 }
 @keyframes thread-travel-long {
-  0% {
-    offset-distance: 0%;
-    opacity: 0;
-  }
-  6% {
-    opacity: 1;
-  }
-  94% {
-    opacity: 1;
-  }
-  100% {
-    offset-distance: 100%;
-    opacity: 0;
-  }
+  0% { offset-distance: 0%; opacity: 0; }
+  6% { opacity: 1; }
+  94% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -431,11 +398,6 @@ body {
   overflow-x: clip;
 }
 
-/* Process timeline step states (driven by scroll progress; fully active
-   without JS / under reduced motion). */
-.process-step-dot {
-  background: var(--bg);
-}
 .process-step-active .process-step-dot {
   background: var(--accent);
   border-color: var(--accent);
@@ -446,12 +408,8 @@ body {
 
 /* Final CTA success check draw-in */
 @keyframes cta-check-draw {
-  from {
-    stroke-dashoffset: 1;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
 }
 .cta-check-path {
   stroke-dasharray: 1;
@@ -463,6 +421,24 @@ body {
     stroke-dashoffset: 0;
     animation: none;
   }
+}
+
+/* Skeleton loader — used in dashboard panels while data fetches. */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-block {
+  background: linear-gradient(
+    90deg,
+    var(--ink-10) 0%,
+    var(--bg-raised) 50%,
+    var(--ink-10) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  border-radius: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -486,4 +462,73 @@ body {
     opacity: 1 !important;
     animation: none !important;
   }
+  .skeleton-block {
+    animation: none;
+    background: var(--ink-10);
+  }
+}
+
+/* ============================================================
+   DARK THEME — activated by [data-theme="dark"] on <html>
+   ============================================================ */
+html[data-theme="dark"] {
+  --bg: #0b1120;
+  --bg-raised: #111827;
+  --bg-muted: #1a2332;
+  --bg-overlay: rgba(0, 0, 0, 0.4);
+  --ink: #e8edf5;
+  --ink-70: rgba(232, 237, 245, 0.7);
+  --ink-50: rgba(232, 237, 245, 0.5);
+  --ink-30: rgba(232, 237, 245, 0.3);
+  --ink-12: rgba(232, 237, 245, 0.12);
+  --ink-10: rgba(232, 237, 245, 0.1);
+  --ink-6: rgba(232, 237, 245, 0.06);
+  --accent: #4d8eff;
+  --accent-strong: #7bb3ff;
+  --accent-tint: rgba(77, 142, 255, 0.12);
+  --accent-20: rgba(77, 142, 255, 0.2);
+  --sand: #c4b896;
+  --sand-deep: #d4c5a0;
+  --sand-tint: rgba(228, 218, 198, 0.12);
+  --grid-line: rgba(232, 237, 245, 0.06);
+  --green: #34d399;
+  --green-10: rgba(52, 211, 153, 0.1);
+  --green-700: rgba(52, 211, 153, 0.8);
+  --amber: #fbbf24;
+  --amber-10: rgba(251, 191, 36, 0.1);
+  --amber-deep: rgba(251, 191, 36, 0.9);
+  --red: #f87171;
+  --red-10: rgba(248, 113, 113, 0.1);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  --background: var(--bg);
+  --surface: var(--bg-raised);
+  --surface-strong: var(--bg-raised);
+  --border: rgba(232, 237, 245, 0.12);
+  --border-strong: rgba(232, 237, 245, 0.25);
+  --text-hi: var(--ink);
+  --text-mid: var(--ink-70);
+  --text-low: var(--ink-50);
+  --navy: var(--ink);
+  --azure: var(--accent);
+  --azure-hover: var(--accent-strong);
+  --azure-deep: var(--accent-strong);
+  --sky: var(--accent);
+  --cta: var(--accent);
+  --cta-hover: var(--accent-strong);
+  --cta-contrast: #0b1120;
+}
+
+/* Theme transition */
+html,
+html * {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+/* Prevent transitions on initial load */
+html.no-theme-transition,
+html.no-theme-transition * {
+  transition: none !important;
 }

@@ -1,0 +1,137 @@
+{
+  "query": "dentists in Houston, TX",
+  "sources": [
+    "google"
+  ],
+  "leads": {
+    "summary": {
+      "query": "dentists in Houston, TX",
+      "sources_used": [
+        "google"
+      ],
+      "total_qualified": 0,
+      "by_source": {
+        "google": 0
+      },
+      "scraped_at": "2026-09-20T01:53:06.965834Z"
+    },
+    "leads": [],
+    "all_businesses": {
+      "google": [
+        {
+          "business_name": "Memorial Park Dental Spa",
+          "address": "Opens 11\u202fam Mon",
+          "phone": "",
+          "rating": 4.8,
+          "review_count": 1091,
+          "website": "",
+          "website_status": "no_website",
+          "category": "(1,091)",
+          "google_maps_url": "https://www.google.com/maps/search/dentists+in+Houston,+TX/@29.7584995,-95.4544431,12z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D",
+          "source": "google_maps",
+          "scraped_at": "2026-09-20T01:53:05.234346Z",
+          "raw_data": {
+            "card_html": "<a class=\"hfpxzc\" aria-label=\"Memorial Park Dental Spa\" href=\"https://www.google.com/maps/place/Memorial+Park+Dental+Spa/data=!4m7!3m6!1s0x8640c732d7f2fa1f:0xdbf14cd1bc8e7e4c!8m2!3d29.7715914!4d-95.4228312!16s%2Fg%2F1tgcs85f!19sChIJH_ry1zLHQIYRTH6OvNFM8ds?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MDkxNi4wIJJjKgBIAVAD&amp;rclk=1\" jsaction=\"pane.wfvdle7;focus:pane.wfvdle7;blur:pane.wfvdle7;auxclick:pane.wfvdle7;keydown:pane.wfvdle7;clickmod:pane.wfvdle7\" jslog=\"12690;track:click,contextmenu;mutable:true;metadata:WyIwYWhVS0V3aXF0WktsaHZ5V0F4Vk42emdHSFp5V0NIc1E4QmNJQ3lnRyIsbnVsbCwwXQ==\"><span class=\"xxVWCe\">Memorial Park Dental Spa</span></a><div class=\"bfdHYd Ppzolf OFBs3e  \"><div class=\"rgFiGf OyjIsf \"></div><div class=\"hHbUWd\"></div><div class=\"rSy5If\"></div><div class=\"lI9IFe \"><div class=\"y7PRA\"><div class=\"Lui3Od T7Wufd \"><div class=\"Z8fK3b\"><div class=\"OyjIsf \"></div><div class=\"UaQhfb fontBodyMedium\"><div class=\"NrDZNb\"><div class=\"qBF1Pd fontHeadlineSmall \">Memorial Park Dental Spa</div></div><div class=\"W4Efsd\"><div class=\"AJB7ye\"><span class=\"e4rVHe fontBodyMedium\"><span role=\"img\" class=\"ZkP5Je\" aria-label=\"4.8 stars 1,091 Reviews\"><span class=\"MW4etd\" aria-hidden=\"true\">4.8</span><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><span class=\"UY7F9\" aria-hidden=\"true\">(1,091)</span></span></span></div></div><div class=\"W4Efsd\"><div class=\"W4Efsd\"><span><span>Dentist</span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span class=\"google-symbols\" aria-label=\"Wheelchair accessible entrance\" role=\"img\" data-tooltip=\"Wheelchair accessible entrance\" jsaction=\"focus:pane.focusTooltip; blur:pane.blurTooltip; keydown:pane.escapeTooltip\" style=\"font-size: 15px;\"><span class=\"doJOZc\">\ue934</span></span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span>6010 Washington Ave Ste d</span></span></div><div class=\"W4Efsd\"><span><span><span style=\"font-weight: 400; color: rgba(211,47,40,1.00);\""
+          }
+        },
+        {
+          "business_name": "Sapphire Smiles - Dr. Antoun | Leading Cosmetic Dentist in Houston",
+          "address": "Opens 9\u202fam Mon",
+          "phone": "",
+          "rating": 5.0,
+          "review_count": 957,
+          "website": "",
+          "website_status": "no_website",
+          "category": "(957)",
+          "google_maps_url": "https://www.google.com/maps/search/dentists+in+Houston,+TX/@29.7584995,-95.4544431,12z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D",
+          "source": "google_maps",
+          "scraped_at": "2026-09-20T01:53:05.439533Z",
+          "raw_data": {
+            "card_html": "<a class=\"hfpxzc\" aria-label=\"Sapphire Smiles - Dr. Antoun | Leading Cosmetic Dentist in Houston\" href=\"https://www.google.com/maps/place/Sapphire+Smiles+-+Dr.+Antoun+%7C+Leading+Cosmetic+Dentist+in+Houston/data=!4m7!3m6!1s0x8640c7badaafece7:0x7e255bad775a9bbf!8m2!3d29.8097516!4d-95.3987812!16s%2Fg%2F11hf2ddld6!19sChIJ5-yv2rrHQIYRv5tad61bJX4?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MDkxNi4wIJJjKgBIAVAD&amp;rclk=1\" jsaction=\"pane.wfvdle9;focus:pane.wfvdle9;blur:pane.wfvdle9;auxclick:pane.wfvdle9;keydown:pane.wfvdle9;clickmod:pane.wfvdle9\" jslog=\"12690;track:click,contextmenu;mutable:true;metadata:WyIwYWhVS0V3aXF0WktsaHZ5V0F4Vk42emdHSFp5V0NIc1E4QmNJTXlnSCIsbnVsbCwxXQ==\"><span class=\"xxVWCe\">Sapphire Smiles - Dr. Antoun | Leading Cosmetic Dentist in Houston</span></a><div class=\"bfdHYd Ppzolf OFBs3e  \"><div class=\"rgFiGf OyjIsf \"></div><div class=\"hHbUWd\"></div><div class=\"rSy5If\"></div><div class=\"lI9IFe \"><div class=\"y7PRA\"><div class=\"Lui3Od T7Wufd \"><div class=\"Z8fK3b\"><div class=\"OyjIsf \"></div><div class=\"UaQhfb fontBodyMedium\"><div class=\"NrDZNb\"><div class=\"qBF1Pd fontHeadlineSmall \">Sapphire Smiles - Dr. Antoun | Leading Cosmetic Dentist in Houston</div></div><div class=\"W4Efsd\"><div class=\"AJB7ye\"><span class=\"e4rVHe fontBodyMedium\"><span role=\"img\" class=\"ZkP5Je\" aria-label=\"5.0 stars 957 Reviews\"><span class=\"MW4etd\" aria-hidden=\"true\">5.0</span><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><span class=\"UY7F9\" aria-hidden=\"true\">(957)</span></span></span></div></div><div class=\"W4Efsd\"><div class=\"W4Efsd\"><span><span>Cosmetic dentist</span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span class=\"google-symbols\" aria-label=\"Wheelchair accessible entrance\" role=\"img\" data-tooltip=\"Wheelchair accessible entrance\" jsaction=\"focus:pane.focusTooltip; blur:pane.blurTooltip; keydown:pane.escapeTooltip\" style=\"font-size: 15px;\"><span class=\"doJOZc\">\ue934</span></span></span><span> "
+          }
+        },
+        {
+          "business_name": "FLOSS Dental of Houston Midtown",
+          "address": "Opens 8\u202fam Mon",
+          "phone": "",
+          "rating": 4.8,
+          "review_count": 706,
+          "website": "",
+          "website_status": "no_website",
+          "category": "(706)",
+          "google_maps_url": "https://www.google.com/maps/search/dentists+in+Houston,+TX/@29.7584995,-95.4544431,12z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D",
+          "source": "google_maps",
+          "scraped_at": "2026-09-20T01:53:05.644607Z",
+          "raw_data": {
+            "card_html": "<a class=\"hfpxzc\" aria-label=\"FLOSS Dental of Houston Midtown\" href=\"https://www.google.com/maps/place/FLOSS+Dental+of+Houston+Midtown/data=!4m7!3m6!1s0x8640bf6bbb597451:0xd71fb2ff4ff42dc5!8m2!3d29.7454832!4d-95.3763676!16s%2Fg%2F11f38l1kg0!19sChIJUXRZu2u_QIYRxS30T_-yH9c?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MDkxNi4wIJJjKgBIAVAD&amp;rclk=1\" jsaction=\"pane.wfvdle11;focus:pane.wfvdle11;blur:pane.wfvdle11;auxclick:pane.wfvdle11;keydown:pane.wfvdle11;clickmod:pane.wfvdle11\" jslog=\"12690;track:click,contextmenu;mutable:true;metadata:WyIwYWhVS0V3aXF0WktsaHZ5V0F4Vk42emdHSFp5V0NIc1E4QmNJWFNnSSIsbnVsbCwyXQ==\"><span class=\"xxVWCe\">FLOSS Dental of Houston Midtown</span></a><div class=\"bfdHYd Ppzolf OFBs3e  \"><div class=\"rgFiGf OyjIsf \"></div><div class=\"hHbUWd\"></div><div class=\"rSy5If\"></div><div class=\"lI9IFe \"><div class=\"y7PRA\"><div class=\"Lui3Od T7Wufd \"><div class=\"Z8fK3b\"><div class=\"OyjIsf \"></div><div class=\"UaQhfb fontBodyMedium\"><div class=\"NrDZNb\"><div class=\"qBF1Pd fontHeadlineSmall \">FLOSS Dental of Houston Midtown</div></div><div class=\"W4Efsd\"><div class=\"AJB7ye\"><span class=\"e4rVHe fontBodyMedium\"><span role=\"img\" class=\"ZkP5Je\" aria-label=\"4.8 stars 706 Reviews\"><span class=\"MW4etd\" aria-hidden=\"true\">4.8</span><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><span class=\"UY7F9\" aria-hidden=\"true\">(706)</span></span></span></div></div><div class=\"W4Efsd\"><div class=\"W4Efsd\"><span><span>Dentist</span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span class=\"google-symbols\" aria-label=\"Wheelchair accessible entrance\" role=\"img\" data-tooltip=\"Wheelchair accessible entrance\" jsaction=\"focus:pane.focusTooltip; blur:pane.blurTooltip; keydown:pane.escapeTooltip\" style=\"font-size: 15px;\"><span class=\"doJOZc\">\ue934</span></span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span>2707 Milam St Ste C</span></span></div><div class=\"W4Efsd\"><span><span><span style=\"font-weight: 400; col"
+          }
+        },
+        {
+          "business_name": "Downtown Houston Dental",
+          "address": "Opens 7\u202fam Mon",
+          "phone": "",
+          "rating": 4.9,
+          "review_count": 488,
+          "website": "",
+          "website_status": "no_website",
+          "category": "(488)",
+          "google_maps_url": "https://www.google.com/maps/search/dentists+in+Houston,+TX/@29.7584995,-95.4544431,12z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D",
+          "source": "google_maps",
+          "scraped_at": "2026-09-20T01:53:05.851286Z",
+          "raw_data": {
+            "card_html": "<a class=\"hfpxzc\" aria-label=\"Downtown Houston Dental\" href=\"https://www.google.com/maps/place/Downtown+Houston+Dental/data=!4m7!3m6!1s0x8640bf3a28d021fb:0x1216240b2ecbfd68!8m2!3d29.7591146!4d-95.3676616!16s%2Fg%2F1vg_d78q!19sChIJ-yHQKDq_QIYRaP3LLgskFhI?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MDkxNi4wIJJjKgBIAVAD&amp;rclk=1\" jsaction=\"pane.wfvdle13;focus:pane.wfvdle13;blur:pane.wfvdle13;auxclick:pane.wfvdle13;keydown:pane.wfvdle13;clickmod:pane.wfvdle13\" jslog=\"12690;track:click,contextmenu;mutable:true;metadata:WyIwYWhVS0V3aXF0WktsaHZ5V0F4Vk42emdHSFp5V0NIc1E4QmNJaHdFb0NRIixudWxsLDNd\"><span class=\"xxVWCe\">Downtown Houston Dental</span></a><div class=\"bfdHYd Ppzolf OFBs3e  \"><div class=\"rgFiGf OyjIsf \"></div><div class=\"hHbUWd\"></div><div class=\"rSy5If\"></div><div class=\"lI9IFe \"><div class=\"y7PRA\"><div class=\"Lui3Od T7Wufd \"><div class=\"Z8fK3b\"><div class=\"OyjIsf \"></div><div class=\"UaQhfb fontBodyMedium\"><div class=\"NrDZNb\"><div class=\"qBF1Pd fontHeadlineSmall \">Downtown Houston Dental</div></div><div class=\"W4Efsd\"><div class=\"AJB7ye\"><span class=\"e4rVHe fontBodyMedium\"><span role=\"img\" class=\"ZkP5Je\" aria-label=\"4.9 stars 488 Reviews\"><span class=\"MW4etd\" aria-hidden=\"true\">4.9</span><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><span class=\"UY7F9\" aria-hidden=\"true\">(488)</span></span></span></div></div><div class=\"W4Efsd\"><div class=\"W4Efsd\"><span><span>Dentist</span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span class=\"google-symbols\" aria-label=\"Wheelchair accessible entrance\" role=\"img\" data-tooltip=\"Wheelchair accessible entrance\" jsaction=\"focus:pane.focusTooltip; blur:pane.blurTooltip; keydown:pane.escapeTooltip\" style=\"font-size: 15px;\"><span class=\"doJOZc\">\ue934</span></span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span>910 Louisiana St Ste 190</span></span></div><div class=\"W4Efsd\"><span><span><span style=\"font-weight: 400; color: rgba(211,47,40,1.00);\">Cl"
+          }
+        },
+        {
+          "business_name": "The Houston Dentists",
+          "address": "Opens 8\u202fam Mon",
+          "phone": "",
+          "rating": 5.0,
+          "review_count": 749,
+          "website": "",
+          "website_status": "no_website",
+          "category": "(749)",
+          "google_maps_url": "https://www.google.com/maps/search/dentists+in+Houston,+TX/@29.7584995,-95.4544431,12z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D",
+          "source": "google_maps",
+          "scraped_at": "2026-09-20T01:53:06.142660Z",
+          "raw_data": {
+            "card_html": "<a class=\"hfpxzc\" aria-label=\"The Houston Dentists\" href=\"https://www.google.com/maps/place/The+Houston+Dentists/data=!4m7!3m6!1s0x8640c734b9d396ab:0xe29eb1051d740897!8m2!3d29.7091618!4d-95.4658834!16s%2Fg%2F12ll7668n!19sChIJq5bTuTTHQIYRlwh0HQWxnuI?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MDkxNi4wIJJjKgBIAVAD&amp;rclk=1\" jsaction=\"pane.wfvdle15;focus:pane.wfvdle15;blur:pane.wfvdle15;auxclick:pane.wfvdle15;keydown:pane.wfvdle15;clickmod:pane.wfvdle15\" jslog=\"12690;track:click,contextmenu;mutable:true;metadata:WyIwYWhVS0V3aXF0WktsaHZ5V0F4Vk42emdHSFp5V0NIc1E4QmNJcndFb0NnIixudWxsLDRd\"><span class=\"xxVWCe\">The Houston Dentists</span></a><div class=\"bfdHYd Ppzolf OFBs3e  \"><div class=\"rgFiGf OyjIsf \"></div><div class=\"hHbUWd\"></div><div class=\"rSy5If\"></div><div class=\"lI9IFe \"><div class=\"y7PRA\"><div class=\"Lui3Od T7Wufd \"><div class=\"Z8fK3b\"><div class=\"OyjIsf \"></div><div class=\"UaQhfb fontBodyMedium\"><div class=\"NrDZNb\"><div class=\"qBF1Pd fontHeadlineSmall \">The Houston Dentists</div></div><div class=\"W4Efsd\"><div class=\"AJB7ye\"><span class=\"e4rVHe fontBodyMedium\"><span role=\"img\" class=\"ZkP5Je\" aria-label=\"5.0 stars 749 Reviews\"><span class=\"MW4etd\" aria-hidden=\"true\">5.0</span><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><span class=\"UY7F9\" aria-hidden=\"true\">(749)</span></span></span></div></div><div class=\"W4Efsd\"><div class=\"W4Efsd\"><span><span>Cosmetic dentist</span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span class=\"google-symbols\" aria-label=\"Wheelchair accessible entrance\" role=\"img\" data-tooltip=\"Wheelchair accessible entrance\" jsaction=\"focus:pane.focusTooltip; blur:pane.blurTooltip; keydown:pane.escapeTooltip\" style=\"font-size: 15px;\"><span class=\"doJOZc\">\ue934</span></span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span>4914 Bissonnet St #200</span></span></div><div class=\"W4Efsd\"><span><span><span style=\"font-weight: 400; color: rgba(211,47,40,1.00);\">Closed"
+          }
+        },
+        {
+          "business_name": "Texas Dental Center",
+          "address": "Opens 8\u202fam Mon",
+          "phone": "",
+          "rating": 4.9,
+          "review_count": 1037,
+          "website": "https://flexbook.me/texasdent?rwg_token=AE37R_i5Qybrbh5owNhp30LPqU0HeVpMWOHrT3kevQ1bDg_NlW_9NAX__ZRKg4wPt1Yns9Ope96avtpOV6fivry428KSfCs_Vw%3D%3D",
+          "website_status": "ok_website",
+          "category": "(1,037)",
+          "google_maps_url": "https://www.google.com/maps/search/dentists+in+Houston,+TX/@29.7584995,-95.4544431,12z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D",
+          "source": "google_maps",
+          "scraped_at": "2026-09-20T01:53:06.473513Z",
+          "raw_data": {
+            "card_html": "<a class=\"hfpxzc\" aria-label=\"Texas Dental Center\" href=\"https://www.google.com/maps/place/Texas+Dental+Center/data=!4m7!3m6!1s0x8640c2a7c1948fd3:0x245bbf59c1a1f299!8m2!3d29.6746216!4d-95.5498136!16s%2Fg%2F113fzvfyr!19sChIJ04-UwafCQIYRmfKhwVm_WyQ?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MDkxNi4wIJJjKgBIAVAD&amp;rclk=1\" jsaction=\"pane.wfvdle17;focus:pane.wfvdle17;blur:pane.wfvdle17;auxclick:pane.wfvdle17;keydown:pane.wfvdle17;clickmod:pane.wfvdle17\" jslog=\"12690;track:click,contextmenu;mutable:true;metadata:WyIwYWhVS0V3aXF0WktsaHZ5V0F4Vk42emdHSFp5V0NIc1E4QmNJMlFFb0N3IixudWxsLDVd\"><span class=\"xxVWCe\">Texas Dental Center</span></a><div class=\"bfdHYd Ppzolf OFBs3e  \"><div class=\"rgFiGf OyjIsf \"></div><div class=\"hHbUWd\"></div><div class=\"rSy5If\"></div><div class=\"lI9IFe \"><div class=\"y7PRA\"><div class=\"Lui3Od T7Wufd \"><div class=\"Z8fK3b\"><div class=\"OyjIsf \"></div><div class=\"UaQhfb fontBodyMedium\"><div class=\"NrDZNb\"><div class=\"qBF1Pd fontHeadlineSmall \">Texas Dental Center</div></div><div class=\"W4Efsd\"><div class=\"AJB7ye\"><span class=\"e4rVHe fontBodyMedium\"><span role=\"img\" class=\"ZkP5Je\" aria-label=\"4.9 stars 1,037 Reviews\"><span class=\"MW4etd\" aria-hidden=\"true\">4.9</span><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><span class=\"UY7F9\" aria-hidden=\"true\">(1,037)</span></span></span></div></div><div class=\"W4Efsd\"><div class=\"W4Efsd\"><span><span>Dentist</span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span class=\"google-symbols\" aria-label=\"Wheelchair accessible entrance\" role=\"img\" data-tooltip=\"Wheelchair accessible entrance\" jsaction=\"focus:pane.focusTooltip; blur:pane.blurTooltip; keydown:pane.escapeTooltip\" style=\"font-size: 15px;\"><span class=\"doJOZc\">\ue934</span></span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span>9801 Bissonnet St Ste K</span></span></div><div class=\"W4Efsd\"><span><span><span style=\"font-weight: 400; color: rgba(211,47,40,1.00);\">Closed</span><"
+          }
+        },
+        {
+          "business_name": "Dentist Tree Of The Heights",
+          "address": "Opens 8\u202fam Mon",
+          "phone": "",
+          "rating": 4.9,
+          "review_count": 732,
+          "website": "https://flexbook.me/dentisttre?rwg_token=AE37R_hRyUHI3URfyc5NBVT2jXbv_iwXDEguU2DvUwGhNuqinx1JBBObwKzL0BKvgpECMDuu86-ZxEQ_azaVxUkfFF7QpX_0kQ%3D%3D",
+          "website_status": "ok_website",
+          "category": "(732)",
+          "google_maps_url": "https://www.google.com/maps/search/dentists+in+Houston,+TX/@29.7584995,-95.4544431,12z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D",
+          "source": "google_maps",
+          "scraped_at": "2026-09-20T01:53:06.783814Z",
+          "raw_data": {
+            "card_html": "<a class=\"hfpxzc\" aria-label=\"Dentist Tree Of The Heights\" href=\"https://www.google.com/maps/place/Dentist+Tree+Of+The+Heights/data=!4m7!3m6!1s0x8640c7d5f68c4fb1:0x520e9f0e6fdb8afe!8m2!3d29.8051853!4d-95.3994216!16s%2Fg%2F11gph82m9l!19sChIJsU-M9tXHQIYR_orbbw6fDlI?authuser=0&amp;hl=en&amp;g_ep=EgoyMDI2MDkxNi4wIJJjKgBIAVAD&amp;rclk=1\" jsaction=\"pane.wfvdle20;focus:pane.wfvdle20;blur:pane.wfvdle20;auxclick:pane.wfvdle20;keydown:pane.wfvdle20;clickmod:pane.wfvdle20\" jslog=\"12690;track:click,contextmenu;mutable:true;metadata:WyIwYWhVS0V3aXF0WktsaHZ5V0F4Vk42emdHSFp5V0NIc1E4QmNJaGdJb0RBIixudWxsLDZd\"><span class=\"xxVWCe\">Dentist Tree Of The Heights</span></a><div class=\"bfdHYd Ppzolf OFBs3e  \"><div class=\"rgFiGf OyjIsf \"></div><div class=\"hHbUWd\"></div><div class=\"rSy5If\"></div><div class=\"lI9IFe \"><div class=\"y7PRA\"><div class=\"Lui3Od T7Wufd \"><div class=\"Z8fK3b\"><div class=\"OyjIsf \"></div><div class=\"UaQhfb fontBodyMedium\"><div class=\"NrDZNb\"><div class=\"qBF1Pd fontHeadlineSmall \">Dentist Tree Of The Heights</div></div><div class=\"W4Efsd\"><div class=\"AJB7ye\"><span class=\"e4rVHe fontBodyMedium\"><span role=\"img\" class=\"ZkP5Je\" aria-label=\"4.9 stars 732 Reviews\"><span class=\"MW4etd\" aria-hidden=\"true\">4.9</span><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><div class=\"QBUL8c \"></div><span class=\"UY7F9\" aria-hidden=\"true\">(732)</span></span></span></div></div><div class=\"W4Efsd\"><div class=\"W4Efsd\"><span><span>Dentist</span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span class=\"google-symbols\" aria-label=\"Wheelchair accessible entrance\" role=\"img\" data-tooltip=\"Wheelchair accessible entrance\" jsaction=\"focus:pane.focusTooltip; blur:pane.blurTooltip; keydown:pane.escapeTooltip\" style=\"font-size: 15px;\"><span class=\"doJOZc\">\ue934</span></span></span><span> <span aria-hidden=\"true\">\u00b7</span> <span>2105 Yale St Ste 300</span></span></div><div class=\"W4Efsd\"><span><span><span style=\"font-weight: 400; color: rgba(211,47"
+          }
+        }
+      ]
+    }
+  },
+  "timestamp": "2026-09-20T01:53:06.965834+00:00"
+}
